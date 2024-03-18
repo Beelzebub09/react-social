@@ -31,6 +31,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+
   const theme = useTheme();
   const neutralLight = theme.palette.neutral.light;
   const dark = theme.palette.neutral.dark;
@@ -38,7 +39,7 @@ const Navbar = () => {
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
 
-  const fullName = "WELCOME GUEST ----";
+  const fullName = user === null ? "Default User" : `${user.firstName} ${user.lastName}`;
 
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
@@ -55,7 +56,7 @@ const Navbar = () => {
             },
           }}
         >
-          ReactSocial
+          Sociopedia
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween
@@ -71,6 +72,8 @@ const Navbar = () => {
           </FlexBetween>
         )}
       </FlexBetween>
+
+      {/* DESKTOP NAV */}
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
           <IconButton onClick={() => dispatch(setMode())}>
@@ -104,7 +107,7 @@ const Navbar = () => {
               <MenuItem value={fullName}>
                 <Typography>{fullName}</Typography>
               </MenuItem>
-              <MenuItem onClick={() => dispatch(setLogout())}>Logout</MenuItem>
+              <MenuItem onClick={() => dispatch(setLogout())}>Log Out</MenuItem>
             </Select>
           </FormControl>
         </FlexBetween>
@@ -116,6 +119,7 @@ const Navbar = () => {
         </IconButton>
       )}
 
+      {/* MOBILE NAV */}
       {!isNonMobileScreens && isMobileMenuToggled && (
         <Box
           position="fixed"
@@ -127,6 +131,7 @@ const Navbar = () => {
           minWidth="300px"
           backgroundColor={background}
         >
+          {/* CLOSE ICON */}
           <Box display="flex" justifyContent="flex-end" p="1rem">
             <IconButton
               onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
@@ -134,6 +139,8 @@ const Navbar = () => {
               <Close />
             </IconButton>
           </Box>
+
+          {/* MENU ITEMS */}
           <FlexBetween
             display="flex"
             flexDirection="column"
@@ -176,7 +183,7 @@ const Navbar = () => {
                   <Typography>{fullName}</Typography>
                 </MenuItem>
                 <MenuItem onClick={() => dispatch(setLogout())}>
-                  Logout
+                  Log Out
                 </MenuItem>
               </Select>
             </FormControl>
