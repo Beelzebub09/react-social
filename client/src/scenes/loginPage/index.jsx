@@ -17,14 +17,14 @@ const LoginPage = () => {
         </Typography>
       </Box>
       <Box
-        width={isNonMobileScreens ? "50%" : "93%"}
+        width={isNonMobileScreens ? "25%" : "90%"}
         p="2rem"
         m="2rem auto"
         borderRadius="1.5rem"
         backgroundColor={theme.palette.background.alt}
       >
-        <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
-          Welcome
+        <Typography fontWeight="500" variant="h4" sx={{ mb: "1.5rem", ml: "0.5rem"}}>
+          Welcome! Please enter your credentials
         </Typography>
         <Form />
       </Box>
