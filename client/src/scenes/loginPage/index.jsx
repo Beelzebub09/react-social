@@ -1,5 +1,6 @@
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import Form from "./Form";
+import { red } from "@mui/material/colors";
 
 const LoginPage = () => {
   const theme = useTheme();
@@ -12,7 +13,7 @@ const LoginPage = () => {
         p="1rem 6%"
         textAlign="center"
       >
-        <Typography fontWeight="bold" fontSize="32px" color="primary">
+        <Typography fontWeight="bold" fontSize="32px" color={red[800]}>
           ReactSocial
         </Typography>
       </Box>
