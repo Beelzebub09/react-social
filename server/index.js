@@ -8,7 +8,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
-import router from "./routes/index.js";
+import {router1, router2, router3} from "./routes/index.js";
 import { register } from "./controllers/auth.js";
 import { createPost } from "./controllers/posts.js";
 import { verifyToken } from "./middleware/auth.js";
@@ -44,7 +44,9 @@ app.post("/auth/register", upload.single("picture"), register);
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
 /* ROUTES */
-app.use("/api", router);
+app.use("/auth", router1);
+app.use("/users", router2);
+app.use("/posts", router3);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001;

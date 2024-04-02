@@ -8,26 +8,27 @@ import {
 import { verifyToken } from "../middleware/auth.js";
 import { getFeedPosts, getUserPosts, likePost } from "../controllers/posts.js";
 
-const router = express.Router();
+export const router1 = express.Router();
+export const router2 = express.Router();
+export const router3 = express.Router();
 
 
-router.post("/login", login);
-
-/* READ */
-router.get("/:id", verifyToken, getUser);
-router.get("/:id/friends", verifyToken, getUserFriends);
-
-/* UPDATE */
-router.patch("/:id/:friendId", verifyToken, addRemoveFriend);
-
+router1.post("/login", login);
 
 /* READ */
-router.get("/", verifyToken, getFeedPosts);
-router.get("/:userId/posts", verifyToken, getUserPosts);
+router2.get("/:id", verifyToken, getUser);
+router2.get("/:id/friends", verifyToken, getUserFriends);
 
 /* UPDATE */
-router.patch("/:id/like", verifyToken, likePost);
+router2.patch("/:id/:friendId", verifyToken, addRemoveFriend);
 
-export default router;
+
+/* READ */
+router3.get("/", verifyToken, getFeedPosts);
+router3.get("/:userId/posts", verifyToken, getUserPosts);
+
+/* UPDATE */
+router3.patch("/:id/like", verifyToken, likePost);
+
 
 
