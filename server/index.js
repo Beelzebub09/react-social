@@ -8,10 +8,10 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
-import {authRouter, userRouter, postRouter} from "./routes/index.js";
 import { register } from "./controllers/auth.js";
 import { createPost } from "./controllers/posts.js";
 import { verifyToken } from "./middleware/auth.js";
+import router from './routes/index.js';
 
 
 /* CONFIGURATIONS */
@@ -40,13 +40,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 /* ROUTES WITH FILES */
+app.use('/', router);
 app.post("/auth/register", upload.single("picture"), register);
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
-/* ROUTES */
-app.use("/auth", authRouter);
-app.use("/users", userRouter);
-app.use("/posts", postRouter);
+
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001;

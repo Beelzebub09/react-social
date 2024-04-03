@@ -1,34 +1,12 @@
 import express from "express";
-import { login } from "../controllers/auth.js";
-import {
-    getUser,
-    getUserFriends,
-    addRemoveFriend,
-} from "../controllers/users.js";
-import { verifyToken } from "../middleware/auth.js";
-import { getFeedPosts, getUserPosts, likePost } from "../controllers/posts.js";
+import authRouter from './auth-route.js';
+import userRouter from './user-route.js';
+import postRouter from './post-route.js';
 
-export const authRouter = express.Router();
-export const userRouter = express.Router();
-export const postRouter = express.Router();
+const router=express.Router();
 
+router.use('/auth', authRouter);
+router.use('/users', userRouter);
+router.use('/posts', postRouter);
 
-authRouter.post("/login", login);
-
-/* READ */
-userRouter.get("/:id", verifyToken, getUser);
-userRouter.get("/:id/friends", verifyToken, getUserFriends);
-
-/* UPDATE */
-userRouter.patch("/:id/:friendId", verifyToken, addRemoveFriend);
-
-
-/* READ */
-postRouter.get("/", verifyToken, getFeedPosts);
-postRouter.get("/:userId/posts", verifyToken, getUserPosts);
-
-/* UPDATE */
-postRouter.patch("/:id/like", verifyToken, likePost);
-
-
-
+export default router;
